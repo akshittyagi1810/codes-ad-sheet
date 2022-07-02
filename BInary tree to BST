@@ -1,0 +1,28 @@
+void BTtoArray(Node* root,vector<int>&v){
+        if(root==NULL) return;
+        
+        v.push_back(root->data);
+        BTtoArray(root->left,v);
+        BTtoArray(root->right,v);
+    }
+    void ArraytoBst(Node* root,vector<int>v,int &i){
+        if(root==NULL) return;
+        
+        ArraytoBst(root->left,v,i);
+        root->data=v[i];
+        i++;
+        ArraytoBst(root->right,v,i);
+    }
+    Node *binaryTreeToBST (Node *root)
+    {
+        //Your code goes here
+        vector<int>v;
+        BTtoArray(root,v);
+        
+        sort(v.begin(),v.end());
+        
+        int i=0;
+        ArraytoBst(root,v,i);
+        
+        return root;
+    }
