@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	//code
+	int k;
+	vector<int>v;
+	int n;
+	//cout<<"Enter the size of array"<<endl;
+	cin>>n;
+	//cout<<"Enter the value of k"<<endl;
+	cin>>k;
+	for(int i=0;i<n;i++){
+	    int x;cin>>x;
+	    v.push_back(x);
+	}
+	
+	sort(v.begin(),v.end());
+	
+	int i=0,j=1;
+	int count=0;
+	while(j<INT_MAX){
+	    if(i<n && v[i]==j){
+	        i++;
+	        //continue;
+	    }
+	    else{
+	        count++;
+	    }
+	    
+	    if(count==k){
+	        cout<<j<<endl;
+	        break;
+	    }
+	    j++;
+	}
+	return 0;
+}
