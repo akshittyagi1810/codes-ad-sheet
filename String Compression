@@ -1,0 +1,53 @@
+Input: chars = ["a","a","b","b","c","c","c"]
+Output: Return 6, and the first 6 characters of the input array should be: ["a","2","b","2","c","3"]
+Explanation: The groups are "aa", "bb", and "ccc". This compresses to "a2b2c3".
+
+Input: chars = ["a"]
+Output: Return 1, and the first character of the input array should be: ["a"]
+
+Input: chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
+Output: Return 4, and the first 4 characters of the input array should be: ["a","b","1","2"].
+
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        //int size=0;
+        vector<char>ans;
+        // int count=4;
+        // char x=count+'0';
+        // cout<<x;
+        for(int i=0;i<chars.size();i++){
+            int count=1;
+            int j=i+1;
+            while(j<chars.size() && chars[i]==chars[j]){
+                j++;
+                count++;
+            }
+            i=j-1;
+            ans.push_back(chars[i]);
+            if(count==1) continue;
+            else if(count<10 && count>1){
+                char x = count +'0'; 
+                ans.push_back(x);
+            }
+            else{
+                vector<char>v;
+                while(count!=0){
+                    int rem=count%10;
+                    char x = rem+'0';
+                    v.push_back(x);
+                    count=count/10;
+                }
+                for(int i=v.size()-1;i>=0;i--){
+                        ans.push_back(v[i]);
+                }
+            }
+            
+        }
+        for(int i=0;i<ans.size();i++){
+            chars[i]=ans[i];
+        }
+        return ans.size();
+        // return 6;
+    }
+};
