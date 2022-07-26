@@ -1,0 +1,42 @@
+Input:
+S = "aabacbebebe", K = 3
+Output: 7
+Explanation: "cbebebe" is the longest 
+substring with K distinct characters.
+
+S = "aaaa", K = 2
+Output: -1
+Explanation: There's no substring with K
+distinct characters.
+
+class Solution{
+  public:
+    int longestKSubstr(string s, int k) {
+    // your code here
+        unordered_map<char,int>mp;
+        int left=0,i=0;
+        int ans=0;
+        while(i<s.size()){
+            mp[s[i]]++;
+            if(mp.size()<k){
+                i++;
+            }
+            else if(mp.size()==k){
+                ans=max(ans,i-left+1);
+                i++;
+            }
+            else if(mp.size()>k){
+                while(mp.size()>k){
+                    if(mp[s[left]]==1) mp.erase(s[left]);
+                    else 
+                    mp[s[left]]--;
+                    left++;
+                }
+                if(mp.size()==k) ans=max(ans,i-left+1);
+                i++;
+            }
+        }
+        if(ans==0) return -1;
+        return ans;
+    }
+};
