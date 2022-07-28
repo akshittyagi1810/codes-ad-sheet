@@ -1,0 +1,53 @@
+Input: m = 4, n = 5
+Output: Following matrix
+X X X X X
+X 0 0 0 X
+X 0 0 0 X
+X X X X X
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int row,col;
+    cin>>row>>col;
+    int maxcount=row*col,count=0,turn=1;
+    int rowst=0,rowend=row-1,colst=0,colend=col-1;
+    char matrix[row][col];
+    char prt;
+    while(count<maxcount){
+        if(turn & 1)prt='X';
+        else prt='O';
+        
+        for(int i=colst;count<maxcount&&i<=colend;i++){
+            matrix[rowst][i]=prt;
+            count++;
+        }
+        rowst++;
+        for(int i=rowst;count<maxcount&&i<=rowend;i++){
+            matrix[i][colend]=prt;
+            count++;
+        }
+        colend--;
+        for(int i=colend;count<maxcount&&i>=colst;i--){
+            matrix[rowend][i]=prt;
+            count++;
+        }
+        rowend--;
+        for(int i=rowend;count<maxcount&&i>=rowst;i--){
+            matrix[i][colst]=prt;
+            count++;
+        }
+        colst++;
+        turn++;
+    }
+    for(int i=0;i<row;i++){
+        for(int j=0;j<col;j++){
+            cout<<matrix[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+	return 0;
+    
+}
